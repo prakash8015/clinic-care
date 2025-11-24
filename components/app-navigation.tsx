@@ -1,8 +1,3 @@
-
-
-// 'use client';
-
-// import Link from 'next/link';"use client";
 "use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,18 +16,21 @@ export function AppNavigation() {
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
-    { href: "/patients", label: "Patients", icon: Users },
-    { href: "/appointments", label: "Appointments", icon: Calendar },
-    { href: "/staff", label: "Staff", icon: UserCog },
-    { href: "/inventory", label: "Inventory", icon: Package },
-    { href: "/branches", label: "Branches", icon: Building2 },
+    { href: "/dashboard/patients", label: "Patients", icon: Users },
+    { href: "/dashboard/appointments", label: "Appointments", icon: Calendar },
+    { href: "/dashboard/staff", label: "Staff", icon: UserCog },
+    { href: "/dashboard/inventory", label: "Inventory", icon: Package },
+    { href: "/dashboard/branches", label: "Branches", icon: Building2 },
   ];
 
   return (
     <nav className="flex gap-1 border-b px-6 bg-background">
       {navItems.map((item) => {
         const Icon = item.icon;
-        const isActive = pathname.startsWith(item.href);
+
+        const isActive =
+          pathname === item.href ||
+          (item.href !== "/dashboard" && pathname.startsWith(item.href));
 
         return (
           <Link
@@ -53,6 +51,7 @@ export function AppNavigation() {
     </nav>
   );
 }
+
 
 // import { usePathname } from 'next/navigation';
 // import { cn } from '@/lib/utils';
