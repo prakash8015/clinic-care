@@ -19,9 +19,28 @@ export interface Patient {
   address: string;
   branchId: number;
   lastVisit: string;
+
+  age?: number;   // ← ADD THIS
+
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+// export interface Patient {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   phone: string;
+//   dateOfBirth: string;
+//   gender: "male" | "female" | "other";
+//   address: string;
+//   branchId: number;
+//   lastVisit: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// }
 
 export interface Staff {
   id: number;
@@ -39,8 +58,8 @@ export interface Staff {
 export interface Appointment {
   id: number;
   patientId: number;
-  staffId: number;
-  appointmentDate: Date;
+  staffId?: number;
+  appointmentDate: string;
   reason: string;
   status: "scheduled" | "completed" | "cancelled";
   notes?: string;

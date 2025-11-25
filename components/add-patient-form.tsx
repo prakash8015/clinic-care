@@ -1,5 +1,6 @@
 
 
+
 //correct patient form
 "use client";
 
@@ -7,9 +8,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export function AddPatientForm({ onSuccess }: { onSuccess: (data: any) => void }) {
+export function AddPatientForm({ onSuccessAction  }: { onSuccessAction : (data: any) => void }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,7 +32,7 @@ export function AddPatientForm({ onSuccess }: { onSuccess: (data: any) => void }
       return;
     }
 
-    onSuccess({
+    onSuccessAction ({
       ...formData,
       age: Number(formData.age)   // 🔥 FIX: Convert age into a number so it shows correctly
     });

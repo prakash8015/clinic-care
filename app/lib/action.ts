@@ -26,25 +26,25 @@ let appointments: Appointment[] = [...mockAppointments];
 let inventory: Inventory[] = [...mockInventory];
 
 // --------------------------------------------
-// GETTERS
+// GETTERS (WITH PROPER TYPES) ✅
 // --------------------------------------------
-export async function getBranches() {
+export async function getBranches(): Promise<Branch[]> {
   return branches;
 }
 
-export async function getPatients() {
+export async function getPatients(): Promise<Patient[]> {
   return patients;
 }
 
-export async function getStaff() {
+export async function getStaff(): Promise<Staff[]> {
   return staff;
 }
 
-export async function getAppointments() {
+export async function getAppointments(): Promise<Appointment[]> {
   return appointments;
 }
 
-export async function getInventory(branchId?: number) {
+export async function getInventory(branchId?: number): Promise<Inventory[]> {
   if (branchId) return inventory.filter((i) => i.branchId === branchId);
   return inventory;
 }
@@ -52,7 +52,9 @@ export async function getInventory(branchId?: number) {
 // --------------------------------------------
 // CREATE PATIENT
 // --------------------------------------------
-export async function createPatient(data: Omit<Patient, "id" | "createdAt" | "updatedAt">) {
+export async function createPatient(
+  data: Omit<Patient, "id" | "createdAt" | "updatedAt">
+): Promise<Patient> {
   const newPatient: Patient = {
     id: patients.length + 1,
     ...data,
@@ -67,7 +69,9 @@ export async function createPatient(data: Omit<Patient, "id" | "createdAt" | "up
 // --------------------------------------------
 // CREATE STAFF
 // --------------------------------------------
-export async function createStaff(data: Omit<Staff, "id" | "createdAt" | "updatedAt">) {
+export async function createStaff(
+  data: Omit<Staff, "id" | "createdAt" | "updatedAt">
+): Promise<Staff> {
   const newStaff: Staff = {
     id: staff.length + 1,
     ...data,
@@ -84,7 +88,7 @@ export async function createStaff(data: Omit<Staff, "id" | "createdAt" | "update
 // --------------------------------------------
 export async function createAppointment(
   data: Omit<Appointment, "id" | "status" | "createdAt" | "updatedAt">
-) {
+): Promise<Appointment> {
   const newAppt: Appointment = {
     id: appointments.length + 1,
     status: "scheduled",
@@ -102,7 +106,7 @@ export async function createAppointment(
 // --------------------------------------------
 export async function createInventoryItem(
   data: Omit<Inventory, "id" | "createdAt" | "updatedAt">
-) {
+): Promise<Inventory> {
   const newItem: Inventory = {
     id: inventory.length + 1,
     ...data,
@@ -116,199 +120,132 @@ export async function createInventoryItem(
 
 
 
+//corrected
 // "use server";
 
-// import { Appointment, Patient, Staff, Branch, Inventory } from "./type";
+// import {
+//   mockBranches,
+//   mockPatients,
+//   mockStaff,
+//   mockAppointments,
+//   mockInventory,
+// } from "./mock-data";
 
-// // ---------------------------------------------------------
-// // IN-MEMORY DATABASE
-// // ---------------------------------------------------------
+// import type {
+//   Branch,
+//   Patient,
+//   Staff,
+//   Appointment,
+//   Inventory,
+// } from "../lib/type";
 
-// // Branch list
-// let branches: Branch[] = [
-//   { id: 1, name: "Boston Medical Center" },
-//   { id: 2, name: "Cambridge Health Clinic" },
-//   { id: 3, name: "Somerville Community Hospital" },
-// ];
+// // --------------------------------------------
+// // IN-MEMORY DATABASE (from mock-data)
+// // --------------------------------------------
+// let branches: Branch[] = [...mockBranches];
+// let patients: Patient[] = [...mockPatients];
+// let staff: Staff[] = [...mockStaff];
+// let appointments: Appointment[] = [...mockAppointments];
+// let inventory: Inventory[] = [...mockInventory];
 
-// // Staff list
-// let staff: Staff[] = [
-//   {
-//     id: 1,
-//     firstName: "Dr.",
-//     lastName: "Adams",
-//     role: "Doctor",
-//     specialization: "General Medicine",
-//     email: "dr.adams@example.com",
-//     phone: "123-456-7890",
-//     branchId: 1,
-//   },
-//   {
-//     id: 2,
-//     firstName: "Nurse",
-//     lastName: "Kelly",
-//     role: "Nurse",
-//     specialization: "Pediatrics",
-//     email: "kelly@example.com",
-//     phone: "555-123-7890",
-//     branchId: 2,
-//   },
-// ];
-
-// // Patient list
-// let patients: Patient[] = [
-//   {
-//     id: 1,
-//     firstName: "John",
-//     lastName: "Doe",
-//     age: 30,
-//     gender: "Male",
-//     phone: "999-888-7777",
-//   },
-//   {
-//     id: 2,
-//     firstName: "Sarah",
-//     lastName: "Smith",
-//     age: 26,
-//     gender: "Female",
-//     phone: "777-666-5555",
-//   },
-// ];
-
-// // Appointment list
-// let appointments: Appointment[] = [
-//   {
-//     id: 1,
-//     patientId: 1,
-//     staffId: 1,
-//     reason: "Consultation",
-//     appointmentDate: new Date().toISOString(),
-//     status: "scheduled",
-//   },
-// ];
-
-// // ---------------------------------------------------------
-// // INVENTORY DATABASE
-// // ---------------------------------------------------------
-// let inventory: Inventory[] = [];
-
-// // ---------------------------------------------------------
-// // INVENTORY FUNCTIONS
-// // ---------------------------------------------------------
-
-// export async function getInventory(branchId?: number) {
-//   if (branchId) {
-//     return inventory.filter((i) => i.branchId === branchId);
-//   }
-//   return inventory;
-// }
-
-// export async function createInventoryItem(data: {
-//   name: string;
-//   category: string;
-//   quantity: number;
-//   unit?: string;
-//   reorderLevel?: number;
-//   branchId?: number;
-//   expiryDate?: string;
-//   supplier?: string;
-// }) {
-//   try {
-//     const newItem: Inventory = {
-//       id: inventory.length + 1,
-//       ...data,
-//     };
-
-//     inventory.push(newItem);
-
-//     console.log("Inventory Item Added:", newItem);
-
-//     return newItem;
-//   } catch (error) {
-//     console.error("Error creating inventory item:", error);
-//     throw error;
-//   }
-// }
-
-// // ---------------------------------------------------------
+// // --------------------------------------------
 // // GETTERS
-// // ---------------------------------------------------------
+// // --------------------------------------------
 // export async function getBranches() {
 //   return branches;
-// }
-
-// export async function getStaff() {
-//   return staff;
 // }
 
 // export async function getPatients() {
 //   return patients;
 // }
 
+// export async function getStaff() {
+//   return staff;
+// }
+
 // export async function getAppointments() {
 //   return appointments;
 // }
 
-// // ---------------------------------------------------------
-// // CREATE STAFF
-// // ---------------------------------------------------------
-// export async function createStaff(data: Omit<Staff, "id">) {
-//   const newStaff: Staff = {
-//     id: staff.length + 1,
-//     ...data,
-//   };
-
-//   staff.push(newStaff);
-
-//   console.log("Staff Added:", newStaff);
-
-//   return newStaff;
+// export async function getInventory(branchId?: number) {
+//   if (branchId) return inventory.filter((i) => i.branchId === branchId);
+//   return inventory;
 // }
 
-// // ---------------------------------------------------------
+// // --------------------------------------------
 // // CREATE PATIENT
-// // ---------------------------------------------------------
-// export async function createPatient(data: Omit<Patient, "id">) {
+// // --------------------------------------------
+// export async function createPatient(data: Omit<Patient, "id" | "createdAt" | "updatedAt">) {
 //   const newPatient: Patient = {
 //     id: patients.length + 1,
 //     ...data,
+//     createdAt: new Date(),
+//     updatedAt: new Date(),
 //   };
 
 //   patients.push(newPatient);
-
-//   console.log("Patient Added:", newPatient);
-
 //   return newPatient;
 // }
 
-// // ---------------------------------------------------------
+// // --------------------------------------------
+// // CREATE STAFF
+// // --------------------------------------------
+// export async function createStaff(data: Omit<Staff, "id" | "createdAt" | "updatedAt">) {
+//   const newStaff: Staff = {
+//     id: staff.length + 1,
+//     ...data,
+//     createdAt: new Date(),
+//     updatedAt: new Date(),
+//   };
+
+//   staff.push(newStaff);
+//   return newStaff;
+// }
+
+// // --------------------------------------------
 // // CREATE APPOINTMENT
-// // ---------------------------------------------------------
+// // --------------------------------------------
 // export async function createAppointment(
-//   data: Omit<Appointment, "id" | "status">
+//   data: Omit<Appointment, "id" | "status" | "createdAt" | "updatedAt">
 // ) {
 //   const newAppt: Appointment = {
 //     id: appointments.length + 1,
 //     status: "scheduled",
 //     ...data,
+//     createdAt: new Date(),
+//     updatedAt: new Date(),
 //   };
 
 //   appointments.push(newAppt);
-
-//   console.log("Appointment Added:", newAppt);
-
 //   return newAppt;
+// }
+
+// // --------------------------------------------
+// // CREATE INVENTORY ITEM
+// // --------------------------------------------
+// export async function createInventoryItem(
+//   data: Omit<Inventory, "id" | "createdAt" | "updatedAt">
+// ) {
+//   const newItem: Inventory = {
+//     id: inventory.length + 1,
+//     ...data,
+//     createdAt: new Date(),
+//     updatedAt: new Date(),
+//   };
+
+//   inventory.push(newItem);
+//   return newItem;
 // }
 
 
 
 // // "use server";
 
-// // import { Appointment, Patient, Staff, Branch,Inventory } from "./type";
+// // import { Appointment, Patient, Staff, Branch, Inventory } from "./type";
 
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // // IN-MEMORY DATABASE
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 
 // // // Branch list
 // // let branches: Branch[] = [
@@ -373,9 +310,21 @@ export async function createInventoryItem(
 // //   },
 // // ];
 
-// // // Inventory list
+// // // ---------------------------------------------------------
+// // // INVENTORY DATABASE
+// // // ---------------------------------------------------------
 // // let inventory: Inventory[] = [];
 
+// // // ---------------------------------------------------------
+// // // INVENTORY FUNCTIONS
+// // // ---------------------------------------------------------
+
+// // export async function getInventory(branchId?: number) {
+// //   if (branchId) {
+// //     return inventory.filter((i) => i.branchId === branchId);
+// //   }
+// //   return inventory;
+// // }
 
 // // export async function createInventoryItem(data: {
 // //   name: string;
@@ -395,6 +344,8 @@ export async function createInventoryItem(
 
 // //     inventory.push(newItem);
 
+// //     console.log("Inventory Item Added:", newItem);
+
 // //     return newItem;
 // //   } catch (error) {
 // //     console.error("Error creating inventory item:", error);
@@ -402,10 +353,9 @@ export async function createInventoryItem(
 // //   }
 // // }
 
-
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // // GETTERS
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // export async function getBranches() {
 // //   return branches;
 // // }
@@ -422,9 +372,9 @@ export async function createInventoryItem(
 // //   return appointments;
 // // }
 
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // // CREATE STAFF
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // export async function createStaff(data: Omit<Staff, "id">) {
 // //   const newStaff: Staff = {
 // //     id: staff.length + 1,
@@ -438,9 +388,9 @@ export async function createInventoryItem(
 // //   return newStaff;
 // // }
 
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // // CREATE PATIENT
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // export async function createPatient(data: Omit<Patient, "id">) {
 // //   const newPatient: Patient = {
 // //     id: patients.length + 1,
@@ -454,9 +404,9 @@ export async function createInventoryItem(
 // //   return newPatient;
 // // }
 
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // // CREATE APPOINTMENT
-// // // --------------------------------------------
+// // // ---------------------------------------------------------
 // // export async function createAppointment(
 // //   data: Omit<Appointment, "id" | "status">
 // // ) {
@@ -477,11 +427,64 @@ export async function createInventoryItem(
 
 // // // "use server";
 
-// // // import { Appointment, Patient, Staff } from "./type";
+// // // import { Appointment, Patient, Staff, Branch,Inventory } from "./type";
 
 // // // // --------------------------------------------
 // // // // IN-MEMORY DATABASE
 // // // // --------------------------------------------
+
+// // // // Branch list
+// // // let branches: Branch[] = [
+// // //   { id: 1, name: "Boston Medical Center" },
+// // //   { id: 2, name: "Cambridge Health Clinic" },
+// // //   { id: 3, name: "Somerville Community Hospital" },
+// // // ];
+
+// // // // Staff list
+// // // let staff: Staff[] = [
+// // //   {
+// // //     id: 1,
+// // //     firstName: "Dr.",
+// // //     lastName: "Adams",
+// // //     role: "Doctor",
+// // //     specialization: "General Medicine",
+// // //     email: "dr.adams@example.com",
+// // //     phone: "123-456-7890",
+// // //     branchId: 1,
+// // //   },
+// // //   {
+// // //     id: 2,
+// // //     firstName: "Nurse",
+// // //     lastName: "Kelly",
+// // //     role: "Nurse",
+// // //     specialization: "Pediatrics",
+// // //     email: "kelly@example.com",
+// // //     phone: "555-123-7890",
+// // //     branchId: 2,
+// // //   },
+// // // ];
+
+// // // // Patient list
+// // // let patients: Patient[] = [
+// // //   {
+// // //     id: 1,
+// // //     firstName: "John",
+// // //     lastName: "Doe",
+// // //     age: 30,
+// // //     gender: "Male",
+// // //     phone: "999-888-7777",
+// // //   },
+// // //   {
+// // //     id: 2,
+// // //     firstName: "Sarah",
+// // //     lastName: "Smith",
+// // //     age: 26,
+// // //     gender: "Female",
+// // //     phone: "777-666-5555",
+// // //   },
+// // // ];
+
+// // // // Appointment list
 // // // let appointments: Appointment[] = [
 // // //   {
 // // //     id: 1,
@@ -493,34 +496,73 @@ export async function createInventoryItem(
 // // //   },
 // // // ];
 
-// // // let patients: Patient[] = [
-// // //   { id: 1, firstName: "John", lastName: "Doe" },
-// // //   { id: 2, firstName: "Sarah", lastName: "Smith" },
-// // // ];
+// // // // Inventory list
+// // // let inventory: Inventory[] = [];
 
-// // // let staff: Staff[] = [
-// // //   { id: 1, firstName: "Dr.", lastName: "Adams" },
-// // //   { id: 2, firstName: "Nurse", lastName: "Kelly" },
-// // // ];
+
+// // // export async function createInventoryItem(data: {
+// // //   name: string;
+// // //   category: string;
+// // //   quantity: number;
+// // //   unit?: string;
+// // //   reorderLevel?: number;
+// // //   branchId?: number;
+// // //   expiryDate?: string;
+// // //   supplier?: string;
+// // // }) {
+// // //   try {
+// // //     const newItem: Inventory = {
+// // //       id: inventory.length + 1,
+// // //       ...data,
+// // //     };
+
+// // //     inventory.push(newItem);
+
+// // //     return newItem;
+// // //   } catch (error) {
+// // //     console.error("Error creating inventory item:", error);
+// // //     throw error;
+// // //   }
+// // // }
+
 
 // // // // --------------------------------------------
 // // // // GETTERS
 // // // // --------------------------------------------
-// // // export async function getAppointments() {
-// // //   return appointments;
-// // // }
-
-// // // export async function getPatients() {
-// // //   console.log("DB Patients:", patients);
-// // //   return patients;
+// // // export async function getBranches() {
+// // //   return branches;
 // // // }
 
 // // // export async function getStaff() {
 // // //   return staff;
 // // // }
 
+// // // export async function getPatients() {
+// // //   return patients;
+// // // }
+
+// // // export async function getAppointments() {
+// // //   return appointments;
+// // // }
+
 // // // // --------------------------------------------
-// // // // CREATE PATIENT  ✅ FIXED
+// // // // CREATE STAFF
+// // // // --------------------------------------------
+// // // export async function createStaff(data: Omit<Staff, "id">) {
+// // //   const newStaff: Staff = {
+// // //     id: staff.length + 1,
+// // //     ...data,
+// // //   };
+
+// // //   staff.push(newStaff);
+
+// // //   console.log("Staff Added:", newStaff);
+
+// // //   return newStaff;
+// // // }
+
+// // // // --------------------------------------------
+// // // // CREATE PATIENT
 // // // // --------------------------------------------
 // // // export async function createPatient(data: Omit<Patient, "id">) {
 // // //   const newPatient: Patient = {
@@ -531,7 +573,6 @@ export async function createInventoryItem(
 // // //   patients.push(newPatient);
 
 // // //   console.log("Patient Added:", newPatient);
-// // //   console.log("All Patients After Add:", patients);
 
 // // //   return newPatient;
 // // // }
@@ -549,5 +590,87 @@ export async function createInventoryItem(
 // // //   };
 
 // // //   appointments.push(newAppt);
+
+// // //   console.log("Appointment Added:", newAppt);
+
 // // //   return newAppt;
 // // // }
+
+
+
+// // // // "use server";
+
+// // // // import { Appointment, Patient, Staff } from "./type";
+
+// // // // // --------------------------------------------
+// // // // // IN-MEMORY DATABASE
+// // // // // --------------------------------------------
+// // // // let appointments: Appointment[] = [
+// // // //   {
+// // // //     id: 1,
+// // // //     patientId: 1,
+// // // //     staffId: 1,
+// // // //     reason: "Consultation",
+// // // //     appointmentDate: new Date().toISOString(),
+// // // //     status: "scheduled",
+// // // //   },
+// // // // ];
+
+// // // // let patients: Patient[] = [
+// // // //   { id: 1, firstName: "John", lastName: "Doe" },
+// // // //   { id: 2, firstName: "Sarah", lastName: "Smith" },
+// // // // ];
+
+// // // // let staff: Staff[] = [
+// // // //   { id: 1, firstName: "Dr.", lastName: "Adams" },
+// // // //   { id: 2, firstName: "Nurse", lastName: "Kelly" },
+// // // // ];
+
+// // // // // --------------------------------------------
+// // // // // GETTERS
+// // // // // --------------------------------------------
+// // // // export async function getAppointments() {
+// // // //   return appointments;
+// // // // }
+
+// // // // export async function getPatients() {
+// // // //   console.log("DB Patients:", patients);
+// // // //   return patients;
+// // // // }
+
+// // // // export async function getStaff() {
+// // // //   return staff;
+// // // // }
+
+// // // // // --------------------------------------------
+// // // // // CREATE PATIENT  ✅ FIXED
+// // // // // --------------------------------------------
+// // // // export async function createPatient(data: Omit<Patient, "id">) {
+// // // //   const newPatient: Patient = {
+// // // //     id: patients.length + 1,
+// // // //     ...data,
+// // // //   };
+
+// // // //   patients.push(newPatient);
+
+// // // //   console.log("Patient Added:", newPatient);
+// // // //   console.log("All Patients After Add:", patients);
+
+// // // //   return newPatient;
+// // // // }
+
+// // // // // --------------------------------------------
+// // // // // CREATE APPOINTMENT
+// // // // // --------------------------------------------
+// // // // export async function createAppointment(
+// // // //   data: Omit<Appointment, "id" | "status">
+// // // // ) {
+// // // //   const newAppt: Appointment = {
+// // // //     id: appointments.length + 1,
+// // // //     status: "scheduled",
+// // // //     ...data,
+// // // //   };
+
+// // // //   appointments.push(newAppt);
+// // // //   return newAppt;
+// // // // }

@@ -60,7 +60,7 @@ export function SelectContent({
       <SelectPrimitive.Content
         data-slot="select-content"
         className={cn(
-          "z-50 min-w-[8rem] overflow-hidden rounded-md bg-popover text-popover-foreground shadow-md border",
+          "z-50 min-w-32 overflow-hidden rounded-md bg-popover text-popover-foreground shadow-md border",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           className
         )}
@@ -103,7 +103,7 @@ export function SelectItem({
       className={cn(
         "relative flex w-full cursor-pointer items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none select-none",
         "focus:bg-accent focus:text-accent-foreground",
-        "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+        "data-disabled:opacity-50 data-disabled:pointer-events-none",
         className
       )}
       {...props}
