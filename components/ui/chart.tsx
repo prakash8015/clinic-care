@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@/app/dashboard/lib/utils"
+import { cn } from "@/lib/utils"
 import {
   Bar,
   BarChart,
