@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/app/dashboard/lib/utils"
+import { cn } from "@/lib/utils"
 import { Menu, X, BarChart3, Users, Calendar, UserCog, Package, Building2 } from "lucide-react"
 
 export function MobileNav() {
