@@ -1,4 +1,4 @@
-import type { Patient, Branch, Staff, Appointment, Inventory } from "../lib/type"
+import type { Patient, Branch, Staff, Appointment, Inventory } from "./type"
 import { mockBranches, mockPatients, mockStaff, mockAppointments, mockInventory } from "./mock-data"
 
 // Simulates API delays for realistic UX

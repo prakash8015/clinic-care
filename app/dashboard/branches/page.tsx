@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Plus, MapPin, Phone, Mail, Building2 } from 'lucide-react';
-import type { Branch } from '../../lib/type';
+import type { Branch } from '../../../lib/type';
 import { toast } from 'sonner';
 
 export default function BranchesPage() {

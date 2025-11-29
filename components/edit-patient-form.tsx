@@ -14,7 +14,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 
 // ✅ Correct type import
-import { Patient } from "@/app/lib/type"
+import { Patient } from "@/lib/type"
 
 
 interface EditPatientFormProps {
