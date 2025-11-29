@@ -16,7 +16,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Mail, Phone, Plus, Search } from 'lucide-react';
 import { toast } from 'sonner';
-import type { Staff, Branch } from '../../lib/type';
+import type { Staff, Branch } from '../../../lib/type';
 
 export default function StaffPage() {
   const [staffList, setStaffList] = useState<Staff[]>([]);

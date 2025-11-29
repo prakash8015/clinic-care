@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Plus, Search, AlertCircle } from 'lucide-react';
-import type { Inventory, Branch } from '../../lib/type';
+import type { Inventory, Branch } from '../../../lib/type';
 import { toast } from 'sonner';
 
 export default function InventoryPage() {
