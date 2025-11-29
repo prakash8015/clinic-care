@@ -6,7 +6,7 @@ import {
   mockStaff,
   mockAppointments,
   mockInventory,
-} from "./mock-data";
+} from "../app/lib/mock-data";
 
 import type {
   Branch,
@@ -14,7 +14,7 @@ import type {
   Staff,
   Appointment,
   Inventory,
-} from "../lib/type";
+} from "../app/lib/type";
 
 // --------------------------------------------
 // IN-MEMORY DATABASE (from mock-data)

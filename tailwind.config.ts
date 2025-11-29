@@ -1,14 +1,13 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss"
+
+const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./lib/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}"
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    require("tailwindcss-animate"),
-  ],
-};
+  theme: { extend: {} },
+  plugins: [require("tailwindcss-animate")],
+}
+
+module.exports = config

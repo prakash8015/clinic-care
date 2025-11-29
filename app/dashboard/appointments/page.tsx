@@ -36,7 +36,7 @@ import {
   getPatients,
   getStaff,
   createAppointment,
-} from "../../lib/action";
+} from "../../../lib/action";
 
 /* ----------------------------------------------------
    ✅ Type Definitions

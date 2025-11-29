@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getStaff, getBranches, createStaff } from '../../lib/action';
+import { getStaff, getBranches, createStaff } from '../../../lib/action';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
