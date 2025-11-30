@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getStaff, getBranches, createStaff } from '../../../lib/action';
+import { getStaff, getBranches, createStaff } from "@/lib/action";
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -16,7 +17,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Mail, Phone, Plus, Search } from 'lucide-react';
 import { toast } from 'sonner';
-import type { Staff, Branch } from '../../../lib/type';
+import type { Staff, Branch } from "@/lib/type";
 
 export default function StaffPage() {
   const [staffList, setStaffList] = useState<Staff[]>([]);
