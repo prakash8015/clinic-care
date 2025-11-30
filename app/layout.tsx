@@ -6,11 +6,13 @@ import { AppNavigation } from "@/components/app-navigation";
 import { BranchProvider } from "./context/branch-context";
 import { Toaster } from "sonner";
 
+export const dynamic = "force-dynamic"; // IMPORTANT for Vercel
+
 async function getBranches() {
-  const res = await fetch("http://localhost:3000/api/branches", {
+  const res = await fetch("/api/branches", {
     cache: "no-store",
   });
-  return await res.json();
+  return res.json();
 }
 
 export const metadata: Metadata = {
@@ -33,7 +35,7 @@ export default async function RootLayout({
           <AppNavigation />
           <main className="px-6 py-6">{children}</main>
         </BranchProvider>
-        {/* Sonner Toast Notifications */}
+
         <Toaster richColors position="top-right" />
       </body>
     </html>
